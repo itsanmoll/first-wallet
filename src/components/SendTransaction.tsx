@@ -47,15 +47,15 @@ const SendTransaction: React.FC = () => {
 
   if (!wallet.isConnected) {
     return (
-      <div className="max-w-md mx-auto">
-        <div className="card text-center">
+      <div className="max-w-md mx-auto magic-magic">
+        <div className="card text-center magic-magic">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Wallet Not Connected</h2>
           <p className="text-gray-600 mb-6">
             Please create or import a wallet to send transactions
           </p>
           <button
             onClick={() => navigate('/')}
-            className="btn-primary"
+            className="btn-primary magic-magic"
           >
             Go to Dashboard
           </button>
@@ -65,8 +65,8 @@ const SendTransaction: React.FC = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto">
-      <div className="card">
+    <div className="max-w-md mx-auto magic-magic">
+      <div className="card magic-magic">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Send ETH</h2>
         
         <div className="space-y-4">
@@ -80,7 +80,7 @@ const SendTransaction: React.FC = () => {
               value={toAddress}
               onChange={(e) => setToAddress(e.target.value)}
               placeholder="0x..."
-              className="input-field"
+              className="input-field magic-magic"
             />
           </div>
 
@@ -96,7 +96,7 @@ const SendTransaction: React.FC = () => {
               placeholder="0.0"
               step="0.0001"
               min="0"
-              className="input-field"
+              className="input-field magic-magic"
             />
             <p className="text-sm text-gray-500 mt-1">
               Available: {parseFloat(wallet.balance).toFixed(4)} ETH
@@ -104,13 +104,13 @@ const SendTransaction: React.FC = () => {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 magic-magic">
               <p className="text-sm text-red-700">{error}</p>
             </div>
           )}
 
           {success && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 magic-magic">
               <div className="flex">
                 <Check className="h-5 w-5 text-green-400 mr-2" />
                 <p className="text-sm text-green-700">{success}</p>
@@ -118,7 +118,7 @@ const SendTransaction: React.FC = () => {
             </div>
           )}
 
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 magic-magic">
             <div className="flex">
               <Send className="h-5 w-5 text-blue-400 mr-2" />
               <div>
@@ -134,7 +134,7 @@ const SendTransaction: React.FC = () => {
           <button
             onClick={handleSend}
             disabled={isLoading}
-            className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            className="btn-primary w-full magic-magic disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
           >
             {isLoading ? (
               <>

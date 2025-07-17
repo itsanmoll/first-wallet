@@ -32,8 +32,8 @@ const ImportWallet: React.FC = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto">
-      <div className="card">
+    <div className="max-w-md mx-auto magic-magic">
+      <div className="card magic-magic">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Import Wallet</h2>
         <p className="text-gray-600 mb-6">
           Import an existing wallet using your private key
@@ -44,7 +44,7 @@ const ImportWallet: React.FC = () => {
             <label htmlFor="privateKey" className="block text-sm font-medium text-gray-700 mb-2">
               Private Key
             </label>
-            <div className="relative">
+            <div className="relative magic-magic">
               <input
                 id="privateKey"
                 type={showPrivateKey ? 'text' : 'password'}
@@ -56,7 +56,7 @@ const ImportWallet: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowPrivateKey(!showPrivateKey)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center magic-magic"
               >
                 {showPrivateKey ? <EyeOff className="h-4 w-4 text-gray-400" /> : <Eye className="h-4 w-4 text-gray-400" />}
               </button>
@@ -64,12 +64,12 @@ const ImportWallet: React.FC = () => {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 magic-magic">
               <p className="text-sm text-red-700">{error}</p>
             </div>
           )}
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 magic-magic">
             <div className="flex">
               <div className="flex-shrink-0">
                 <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
@@ -93,7 +93,7 @@ const ImportWallet: React.FC = () => {
           <button
             onClick={handleImport}
             disabled={isLoading}
-            className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary w-full magic-magic disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? 'Importing...' : 'Import Wallet'}
           </button>

@@ -29,15 +29,15 @@ const TransactionHistory: React.FC = () => {
 
   if (!wallet.isConnected) {
     return (
-      <div className="max-w-md mx-auto">
-        <div className="card text-center">
+      <div className="max-w-md mx-auto magic-magic">
+        <div className="card text-center magic-magic">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Wallet Not Connected</h2>
           <p className="text-gray-600 mb-6">
             Please create or import a wallet to view transaction history
           </p>
           <button
             onClick={() => navigate('/')}
-            className="btn-primary"
+            className="btn-primary magic-magic"
           >
             Go to Dashboard
           </button>
@@ -47,12 +47,12 @@ const TransactionHistory: React.FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="card">
+    <div className="max-w-4xl mx-auto magic-magic">
+      <div className="card magic-magic">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Transaction History</h2>
         
         {mockTransactions.length === 0 ? (
-          <div className="text-center py-8">
+          <div className="text-center py-8 magic-magic">
             <Clock className="h-12 w-12 text-gray-400 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">No transactions yet</h3>
             <p className="text-gray-600">
@@ -62,7 +62,7 @@ const TransactionHistory: React.FC = () => {
         ) : (
           <div className="space-y-4">
             {mockTransactions.map((tx, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-4">
+              <div key={index} className="border border-gray-200 rounded-lg p-4 magic-magic">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className={`w-3 h-3 rounded-full ${
@@ -104,7 +104,7 @@ const TransactionHistory: React.FC = () => {
                     href={`https://etherscan.io/tx/${tx.hash}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-sm text-primary-600 hover:text-primary-700"
+                    className="flex items-center text-sm text-primary-600 hover:text-primary-700 magic-magic"
                   >
                     <ExternalLink className="h-4 w-4 mr-1" />
                     View on Etherscan
@@ -115,7 +115,7 @@ const TransactionHistory: React.FC = () => {
           </div>
         )}
 
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4 magic-magic">
           <div className="flex">
             <Clock className="h-5 w-5 text-blue-400 mr-2" />
             <div>

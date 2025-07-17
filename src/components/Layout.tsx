@@ -20,9 +20,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 magic-magic">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="bg-white shadow-sm border-b border-gray-200 magic-magic">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -37,7 +37,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </div>
                 <button
                   onClick={disconnect}
-                  className="flex items-center text-sm text-gray-500 hover:text-gray-700"
+                  className="flex items-center text-sm text-gray-500 hover:text-gray-700 magic-magic"
                 >
                   <LogOut className="h-4 w-4 mr-1" />
                   Disconnect
@@ -52,18 +52,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="flex">
           {/* Sidebar */}
           {wallet.isConnected && (
-            <nav className="w-64 mr-8">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <nav className="w-64 mr-8 magic-magic">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 magic-magic">
                 <ul className="space-y-2">
                   {navigation.map((item) => {
                     const Icon = item.icon
                     const isActive = location.pathname === item.href
                     
                     return (
-                      <li key={item.name}>
+                      <li key={item.name} className="magic-magic">
                         <Link
                           to={item.href}
-                          className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors magic-magic ${
                             isActive
                               ? 'bg-primary-50 text-primary-700 border-r-2 border-primary-700'
                               : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
@@ -81,7 +81,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           )}
 
           {/* Main content */}
-          <main className="flex-1">
+          <main className="flex-1 magic-magic">
             {children}
           </main>
         </div>

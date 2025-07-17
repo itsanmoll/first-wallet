@@ -12,8 +12,8 @@ const Dashboard: React.FC = () => {
 
   if (!wallet.isConnected) {
     return (
-      <div className="max-w-md mx-auto">
-        <div className="card text-center">
+      <div className="max-w-md mx-auto magic-magic">
+        <div className="card text-center magic-magic">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Welcome to Web Wallet</h2>
           <p className="text-gray-600 mb-8">
             Create a new wallet or import an existing one to get started
@@ -21,14 +21,14 @@ const Dashboard: React.FC = () => {
           <div className="space-y-4">
             <Link
               to="/create"
-              className="btn-primary w-full flex items-center justify-center"
+              className="btn-primary w-full flex items-center justify-center magic-magic"
             >
               <Plus className="h-5 w-5 mr-2" />
               Create New Wallet
             </Link>
             <Link
               to="/import"
-              className="btn-secondary w-full flex items-center justify-center"
+              className="btn-secondary w-full flex items-center justify-center magic-magic"
             >
               <Download className="h-5 w-5 mr-2" />
               Import Wallet
@@ -40,14 +40,14 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 magic-magic">
       {/* Balance Card */}
-      <div className="card">
+      <div className="card magic-magic">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-gray-900">Balance</h2>
           <button
             onClick={getBalance}
-            className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
+            className="p-2 text-gray-500 hover:text-gray-700 transition-colors magic-magic"
           >
             <RefreshCw className="h-5 w-5" />
           </button>
@@ -61,15 +61,15 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Address Card */}
-      <div className="card">
+      <div className="card magic-magic">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Wallet Address</h3>
-        <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+        <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg magic-magic">
           <code className="text-sm text-gray-700 flex-1 break-all">
             {wallet.address}
           </code>
           <button
             onClick={() => copyToClipboard(wallet.address || '')}
-            className="p-1 text-gray-500 hover:text-gray-700 transition-colors"
+            className="p-1 text-gray-500 hover:text-gray-700 transition-colors magic-magic"
             title="Copy address"
           >
             <Copy className="h-4 w-4" />
@@ -78,12 +78,12 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="card">
+      <div className="card magic-magic">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Link
             to="/send"
-            className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-colors"
+            className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-colors magic-magic"
           >
             <Send className="h-6 w-6 text-primary-600 mr-3" />
             <div>
@@ -94,7 +94,7 @@ const Dashboard: React.FC = () => {
           
           <Link
             to="/history"
-            className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-colors"
+            className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-colors magic-magic"
           >
             <Download className="h-6 w-6 text-primary-600 mr-3" />
             <div>
@@ -106,7 +106,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Security Notice */}
-      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 magic-magic">
         <div className="flex">
           <div className="flex-shrink-0">
             <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
