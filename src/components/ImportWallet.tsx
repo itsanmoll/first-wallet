@@ -1,106 +1,48 @@
-import React, { useState } from 'react'
-import { useWallet } from '../contexts/WalletContext'
-import { useNavigate } from 'react-router-dom'
-import { Eye, EyeOff } from 'lucide-react'
+import React, { useState } from 'react';
+import { useWallet } from '../contexts/WalletContext';
 
 const ImportWallet: React.FC = () => {
-  const { importWallet } = useWallet()
-  const navigate = useNavigate()
-  const [privateKey, setPrivateKey] = useState('')
-  const [showPrivateKey, setShowPrivateKey] = useState(false)
-  const [error, setError] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const { importWallet, wallet } = useWallet();
+  const [privateKey, setPrivateKey] = useState('');
+  const [imported, setImported] = useState<null | boolean>(null);
 
-  const handleImport = async () => {
-    if (!privateKey.trim()) {
-      setError('Please enter a private key')
-      return
-    }
-
-    setIsLoading(true)
-    setError('')
-
-    const success = importWallet(privateKey.trim())
-    
-    if (success) {
-      navigate('/')
-    } else {
-      setError('Invalid private key. Please check and try again.')
-    }
-    
-    setIsLoading(false)
-  }
+  const handleImport = (e: React.FormEvent) => {
+    e.preventDefault();
+    const success = importWallet(privateKey);
+    setImported(success);
+  };
 
   return (
-    <div className="max-w-md mx-auto magic-magic">
-      <div className="card magic-magic">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Import Wallet</h2>
-        <p className="text-gray-600 mb-6">
-          Import an existing wallet using your private key
-        </p>
-
-        <div className="space-y-4">
-          <div>
-            <label htmlFor="privateKey" className="block text-sm font-medium text-gray-700 mb-2">
-              Private Key
-            </label>
-            <div className="relative magic-magic">
-              <input
-                id="privateKey"
-                type={showPrivateKey ? 'text' : 'password'}
-                value={privateKey}
-                onChange={(e) => setPrivateKey(e.target.value)}
-                placeholder="Enter your private key"
-                className="input-field pr-10"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPrivateKey(!showPrivateKey)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center magic-magic"
-              >
-                {showPrivateKey ? <EyeOff className="h-4 w-4 text-gray-400" /> : <Eye className="h-4 w-4 text-gray-400" />}
-              </button>
-            </div>
-          </div>
-
-          {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 magic-magic">
-              <p className="text-sm text-red-700">{error}</p>
-            </div>
-          )}
-
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 magic-magic">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-yellow-800">
-                  Security Notice
-                </h3>
-                <div className="mt-2 text-sm text-yellow-700">
-                  <p>
-                    Never share your private key. This demo wallet stores keys in browser storage,
-                    which is not secure for real funds.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <button
-            onClick={handleImport}
-            disabled={isLoading}
-            className="btn-primary w-full magic-magic disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoading ? 'Importing...' : 'Import Wallet'}
-          </button>
+    <div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow p-8 mt-8">
+      <h2 className="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400">Import Wallet</h2>
+      <form onSubmit={handleImport} className="space-y-4">
+        <input
+          type="text"
+          placeholder="Enter Private Key"
+          value={privateKey}
+          onChange={e => setPrivateKey(e.target.value)}
+          className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition font-semibold"
+        >
+          Import
+        </button>
+      </form>
+      {imported === true && wallet.address && (
+        <div className="mt-4 p-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">
+          <div className="font-semibold">Wallet Imported!</div>
+          <div className="break-all text-xs mt-2">Address: {wallet.address}</div>
         </div>
-      </div>
+      )}
+      {imported === false && (
+        <div className="mt-4 p-4 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded">
+          Failed to import wallet. Please check your private key.
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ImportWallet 
+export default ImportWallet; 

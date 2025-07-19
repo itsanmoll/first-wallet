@@ -1,93 +1,60 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { useWallet } from '../contexts/WalletContext'
-import { Wallet, Plus, Download, Send, History, LogOut } from 'lucide-react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-interface LayoutProps {
-  children: React.ReactNode
-}
+const navItems = [
+  { name: 'Dashboard', path: '/' },
+  { name: 'Create Wallet', path: '/create' },
+  { name: 'Import Wallet', path: '/import' },
+  { name: 'Send', path: '/send' },
+  { name: 'Transactions', path: '/history' },
+];
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { wallet, disconnect } = useWallet()
-  const location = useLocation()
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [darkMode, setDarkMode] = useState(false);
 
-  const navigation = [
-    { name: 'Dashboard', href: '/', icon: Wallet },
-    { name: 'Create Wallet', href: '/create', icon: Plus },
-    { name: 'Import Wallet', href: '/import', icon: Download },
-    { name: 'Send', href: '/send', icon: Send },
-    { name: 'History', href: '/history', icon: History },
-  ]
+  React.useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
 
   return (
-    <div className="min-h-screen bg-gray-50 magic-magic">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200 magic-magic">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Wallet className="h-8 w-8 text-primary-600" />
-              <h1 className="ml-2 text-xl font-semibold text-gray-900">Web Wallet</h1>
-            </div>
-            
-            {wallet.isConnected && (
-              <div className="flex items-center space-x-4">
-                <div className="text-sm text-gray-600">
-                  {wallet.address?.slice(0, 6)}...{wallet.address?.slice(-4)}
-                </div>
-                <button
-                  onClick={disconnect}
-                  className="flex items-center text-sm text-gray-500 hover:text-gray-700 magic-magic"
+    <div className="min-h-screen flex bg-gray-50 dark:bg-gray-900 transition-colors">
+      <aside className="w-64 bg-white dark:bg-gray-800 shadow-lg flex flex-col p-6">
+        <div className="flex items-center justify-between mb-8">
+          <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">Wallet</span>
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="ml-2 p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? '🌙' : '☀️'}
+          </button>
+        </div>
+        <nav className="flex-1">
+          <ul className="space-y-2">
+            {navItems.map((item) => (
+              <li key={item.name}>
+                <Link
+                  to={item.path}
+                  className="block px-4 py-2 rounded text-gray-700 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-blue-900 transition"
                 >
-                  <LogOut className="h-4 w-4 mr-1" />
-                  Disconnect
-                </button>
-              </div>
-            )}
-          </div>
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+      <main className="flex-1 p-8 bg-gray-50 dark:bg-gray-900 transition-colors">
+        <div className="max-w-3xl mx-auto">
+          {children}
         </div>
-      </header>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex">
-          {/* Sidebar */}
-          {wallet.isConnected && (
-            <nav className="w-64 mr-8 magic-magic">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 magic-magic">
-                <ul className="space-y-2">
-                  {navigation.map((item) => {
-                    const Icon = item.icon
-                    const isActive = location.pathname === item.href
-                    
-                    return (
-                      <li key={item.name} className="magic-magic">
-                        <Link
-                          to={item.href}
-                          className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors magic-magic ${
-                            isActive
-                              ? 'bg-primary-50 text-primary-700 border-r-2 border-primary-700'
-                              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                          }`}
-                        >
-                          <Icon className="h-4 w-4 mr-3" />
-                          {item.name}
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            </nav>
-          )}
-
-          {/* Main content */}
-          <main className="flex-1 magic-magic">
-            {children}
-          </main>
-        </div>
-      </div>
+      </main>
     </div>
-  )
-}
+  );
+};
 
-export default Layout 
+export default Layout; 
